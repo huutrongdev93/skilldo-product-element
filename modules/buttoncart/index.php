@@ -57,7 +57,7 @@ Class Product_Element_Button_Cart {
                 $config[$key] = Str::clear($form_contact[$key]);
         }
 
-        Option::update('product_element_form_contact', $config);
+        Option::update('product_element_button_cart', $config);
 
         $result['status']  = 'success';
 
@@ -74,6 +74,20 @@ Class Product_Element_Button_Cart {
     }
 
     public function css() {
+        $config = Product_Element_Button_Cart::config();
+        ?>
+        <style>
+            :root {
+                --pre-button-cart-padding           : <?php echo $config['padding'];?>;
+                --pre-button-cart-margin           : <?php echo $config['margin'];?>;
+                --pre-button-cart-bg_button         : <?php echo (!empty($config['bg_button'])) ? $config['bg_button'] : 'var(--theme-color)';?>;
+                --pre-button-cart-bg_button_hover   : <?php echo (!empty($config['bg_button_hover'])) ? $config['bg_button_hover'] : 'var(--theme-color)';?>;
+                --pre-button-cart-color_button      : <?php echo $config['color_button'];?>;
+                --pre-button-cart-color_button_hover: <?php echo (!empty($config['color_button_hover'])) ? $config['color_button_hover'] : 'var(--theme-color)';?>;
+            }
+        </style>
+
+        <?php
         include PR_EL_PATH.'/modules/'.Product_Element_Button_Cart::KEY.'/views/style-element.css';
     }
 }
