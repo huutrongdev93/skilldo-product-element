@@ -1,6 +1,6 @@
 <div class="box">
     <div class="header"><h3>TEXT</h3></div>
-    <div class="box-content">
+    <div class="box-content row m-1">
         <?php
         $Form = new FormBuilder();
         $Form->add('buttoncart[position]', 'number', ['label' => 'Thứ tự gắn vào hook "product_object_info"'], Product_Element_Button_Cart::config('position'));
@@ -12,7 +12,7 @@
 
 <div class="box">
     <div class="header"><h3>STYLE</h3></div>
-    <div class="box-content">
+    <div class="box-content row m-1">
         <?php
         $Form->add('buttoncart[location]', 'select', ['label' => 'Vị trí', 'options' => ['center' => 'Center', 'left' => 'Left', 'right' => 'Right']], Product_Element_Button_Cart::config('location'));
         $Form->add('buttoncart[padding]', 'text', ['label' => 'Padding khung', 'after' => '<div class="col-md-6"><div class="form-group group">', 'before'=> '</div></div>'], Product_Element_Button_Cart::config('padding'));

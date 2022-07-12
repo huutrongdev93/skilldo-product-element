@@ -1,6 +1,6 @@
 <div class="box">
     <div class="header"><h3>TEXT</h3></div>
-    <div class="box-content">
+    <div class="box-content row m-1">
         <?php
         $Form = new FormBuilder();
         $Form->add('viewscart[position]', 'number', ['label' => 'Thứ tự gắn vào hook "product_object_info"'], Product_Element_Views_Cart::config('position'));
@@ -12,7 +12,7 @@
 
 <div class="box">
     <div class="header"><h3>LƯỢT XEM</h3></div>
-    <div class="box-content">
+    <div class="box-content row m-1">
         <?php
         $Form->add('viewscart[views_icon]', 'text', ['label' => 'Icon'], Product_Element_Views_Cart::config('views_icon'));
         $Form->add('viewscart[views_bg]', 'color', ['label' => 'Màu nền button', 'after' => '<div class="col-md-6"><div class="form-group group">', 'before'=> '</div></div>'], Product_Element_Views_Cart::config('views_bg'));
@@ -26,7 +26,7 @@
 
 <div class="box">
     <div class="header"><h3>CART</h3></div>
-    <div class="box-content">
+    <div class="box-content row m-1">
         <?php
         $Form->add('viewscart[cart_icon]', 'text', ['label' => 'Icon'], Product_Element_Views_Cart::config('cart_icon'));
         $Form->add('viewscart[cart_bg]', 'color', ['label' => 'Màu nền button', 'after' => '<div class="col-md-6"><div class="form-group group">', 'before'=> '</div></div>'], Product_Element_Views_Cart::config('cart_bg'));

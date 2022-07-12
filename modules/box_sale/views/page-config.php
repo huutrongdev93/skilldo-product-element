@@ -1,6 +1,6 @@
 <div class="box">
     <div class="header"><h3>LOẠI</h3></div>
-    <div class="box-content">
+    <div class="box-content row m-1">
         <div class="col-md-6">
             <div class="radio">
                 <label class="text-center">
@@ -21,7 +21,7 @@
 </div>
 <div class="box">
     <div class="header"><h3>TEXT</h3></div>
-    <div class="box-content">
+    <div class="box-content row m-1">
         <?php
         $Form = new FormBuilder();
         $Form->add('box_sale[position]', 'number', ['label' => 'Thứ tự gắn vào hook "product_detail_info"'], Product_Element_Box_Sale::config('position'));
@@ -33,7 +33,7 @@
 
 <div class="box">
     <div class="header"><h3>STYLE</h3></div>
-    <div class="box-content">
+    <div class="box-content row m-1">
         <?php
         $Form->add('box_sale[padding]', 'text', ['label' => 'Padding', 'after' => '<div class="col-md-6"><div class="form-group group">', 'before'=> '</div></div>'], Product_Element_Box_Sale::config('padding'));
         $Form->add('box_sale[margin]', 'text', ['label' => 'Margin', 'after' => '<div class="col-md-6"><div class="form-group group">', 'before'=> '</div></div>'], Product_Element_Box_Sale::config('margin'));

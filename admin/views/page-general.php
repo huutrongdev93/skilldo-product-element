@@ -1,6 +1,7 @@
 <div class="box">
     <div class="header"><h3>Cấu hình chung</h3></div>
     <div class="box-content">
+        <div class="row m-1">
         <?php
         $Form = new FormBuilder();
         $Form->add('module_active', 'checkbox', [
@@ -17,6 +18,7 @@
         ], Product_Element::config('module_active'));
         $Form->html(false);
         ?>
+        </div>
     </div>
 </div>
 

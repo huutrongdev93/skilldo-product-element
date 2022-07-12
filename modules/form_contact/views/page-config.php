@@ -6,7 +6,7 @@
 </div>
 <div class="box">
     <div class="header"><h3>TEXT</h3></div>
-    <div class="box-content">
+    <div class="box-content row m-1">
         <?php
         $Form = new FormBuilder();
         $Form->add('form_contact[position]', 'number', ['label' => 'Thứ tự gắn vào hook "product_detail_info"'], Product_Element_Form_Contact::config('position'));
@@ -20,7 +20,7 @@
 
 <div class="box">
     <div class="header"><h3>STYLE</h3></div>
-    <div class="box-content">
+    <div class="box-content row m-1">
         <?php
         $Form->add('form_contact[padding]', 'text', ['label' => 'Padding khung'], Product_Element_Form_Contact::config('padding'));
         $Form->add('form_contact[bg_box]', 'color', ['label' => 'Màu nền Box'], Product_Element_Form_Contact::config('bg_box'));
