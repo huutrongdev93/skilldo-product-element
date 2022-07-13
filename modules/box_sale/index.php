@@ -91,7 +91,7 @@ Class Product_Element_Box_Sale {
     ===================================*/
     public function render($object) {
         $sale   = Product::getMeta($object->id, 'box_sale', true);
-        if(!empty($sale)) {
+        if(!empty($sale) && $sale != '<p><br data-mce-bogus="1"></p>') {
             $config = Product_Element_Box_Sale::config();
             if ($config['style'] == 1) {
                 include PR_EL_PATH . '/modules/' . Product_Element_Box_Sale::KEY . '/views/element.php';
