@@ -50,7 +50,7 @@ Class Product_Element_Button_Cart {
 
         $config = Product_Element_Button_Cart::config();
 
-        $form_contact = InputBuilder::Post('buttoncart');
+        $form_contact = Request::Post('buttoncart');
 
         foreach ($config as $key => $item) {
             if(isset($form_contact[$key]))
@@ -69,7 +69,7 @@ Class Product_Element_Button_Cart {
 
     public function render($object) {
         $config = Product_Element_Button_Cart::config();
-        $count = Product::count(['where' => ['parent_id' => $object->id, 'type' => 'variations']]);
+        $count = Product::count(Qr::set('parent_id', $object->id)->where('type', 'variations'));
         include PR_EL_PATH.'/modules/'.Product_Element_Button_Cart::KEY.'/views/element.php';
     }
 

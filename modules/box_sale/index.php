@@ -53,7 +53,7 @@ Class Product_Element_Box_Sale {
 
         $config = Product_Element_Box_Sale::config();
 
-        $form_contact = InputBuilder::Post('box_sale');
+        $form_contact = Request::Post('box_sale');
 
         foreach ($config as $key => $item) {
             if(isset($form_contact[$key]))
@@ -81,7 +81,7 @@ Class Product_Element_Box_Sale {
 
     public static function saveSale($product_id, $module) {
         if($module == 'products') {
-            $sale = InputBuilder::Post('box_sale', ['clear' => false]);
+            $sale = Request::Post('box_sale', ['clear' => false]);
             Product::updateMeta($product_id, 'box_sale', $sale);
         }
     }

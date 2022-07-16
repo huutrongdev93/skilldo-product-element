@@ -1,7 +1,7 @@
 <?php
 if(have_posts($tabs)) {
     reset($tabs);
-    $section = (InputBuilder::get('section')) ? InputBuilder::get('section') : key($tabs);
+    $section = (Request::get('section')) ? Request::get('section') : key($tabs);
     ?>
     <form id="js_product_element_form" method="post">
         <div class="action-bar">

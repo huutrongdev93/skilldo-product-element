@@ -51,7 +51,7 @@ Class Product_Element_Views {
 
         $config = Product_Element_Views::config();
 
-        $form_contact = InputBuilder::Post('views');
+        $form_contact = Request::Post('views');
 
         foreach ($config as $key => $item) {
             if(isset($form_contact[$key]))
@@ -79,7 +79,7 @@ Class Product_Element_Views {
 
     public static function saveViews($product_id, $module) {
         if($module == 'products') {
-            $product_views = (int)InputBuilder::Post('views');
+            $product_views = (int)Request::Post('views');
             Product::updateMeta($product_id, 'views', $product_views);
         }
     }

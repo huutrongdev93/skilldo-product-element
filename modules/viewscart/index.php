@@ -65,7 +65,7 @@ Class Product_Element_Views_Cart {
 
         $config = Product_Element_Views_Cart::config();
 
-        $form_contact = InputBuilder::Post('viewscart');
+        $form_contact = Request::Post('viewscart');
 
         foreach ($config as $key => $item) {
             if(isset($form_contact[$key]))
@@ -91,7 +91,7 @@ Class Product_Element_Views_Cart {
 
     public static function saveViews($product_id, $module) {
         if($module == 'products') {
-            $product_views = (int)InputBuilder::Post('views');
+            $product_views = (int)Request::Post('views');
             Product::updateMeta($product_id, 'views', $product_views);
         }
     }
@@ -102,7 +102,7 @@ Class Product_Element_Views_Cart {
     public function render($object) {
         $config = Product_Element_Views_Cart::config();
         $view = (int)Product::getMeta($object->id, 'views', true);
-        $count = Product::count(['where' => ['parent_id' => $object->id, 'type' => 'variations']]);
+        $count = Product::count(Qr::set('parent_id', $object->id)->where('type', 'variations'));
         include PR_EL_PATH.'/modules/'.Product_Element_Views_Cart::KEY.'/views/element.php';
     }
 

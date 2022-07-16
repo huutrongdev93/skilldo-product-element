@@ -37,7 +37,7 @@ Class Product_Element_Ajax {
 
         $config = Product_Element::config();
 
-        $module_active = InputBuilder::Post('module_active');
+        $module_active = Request::Post('module_active');
 
         if(empty($module_active)) {
             $config['module_active'] = [];
@@ -73,8 +73,8 @@ new Product_Element_Ajax();
 function admin_ajax_product_element_save($ci, $modal) {
     $result['status']  = 'error';
     $result['message'] = __('Lưu dữ liệu không thành công');
-    if(InputBuilder::Post()) {
-        $module = trim(InputBuilder::post('module'));
+    if(Request::Post()) {
+        $module = trim(Request::post('module'));
         if($module == 'general') {
             $result = Product_Element_Ajax::saveGeneral($ci, $modal);
         }

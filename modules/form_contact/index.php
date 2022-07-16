@@ -72,7 +72,7 @@ Class Product_Element_Form_Contact {
 
         $config = Product_Element_Form_Contact::config();
 
-        $form_contact = InputBuilder::Post('form_contact');
+        $form_contact = Request::Post('form_contact');
 
         foreach ($config as $key => $item) {
             if(isset($form_contact[$key]))
