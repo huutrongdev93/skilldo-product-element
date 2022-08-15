@@ -7,9 +7,6 @@
         $Form->add('module_active', 'checkbox', [
             'label' => 'Hiển thị',
             'options' => [
-                'viewscart'    => 'Views & Cart',
-                'views'        => 'Lượt xem',
-                'buttoncart'   => 'Button mua hàng',
                 'form_contact' => 'Form contact',
                 'box_sale'     => 'Khung khuyến mãi',
             ],

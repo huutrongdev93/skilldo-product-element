@@ -5,7 +5,7 @@ Plugin class    : Product_Element
 Plugin uri      : http://sikido.vn
 Description     : Ứng dụng Product Element
 Author          : Nguyễn Hữu Trọng
-Version         : 1.0.4
+Version         : 1.1.0
  */
 define( 'PR_EL_NAME', 'product-element' );
 
@@ -39,6 +39,8 @@ class Product_Element {
                 if(file_exists($path)) require_once $path;
             }
         }
+
+        include_once PR_EL_PATH.'/modules/views_cart/index.php';
     }
 
     public static function config($key = '') {
