@@ -11,13 +11,13 @@ Class ProductElementViewsCart {
             add_action('cle_header', 'ProductElementViewsCart::cssVariables');
             add_action('theme_custom_less', 'ProductElementViewsCart::less');
             add_action('cle_footer', 'ProductElementViewsCart::autoPlusView');
-            if(Prd::itemStyle('viewsCart.style') == 'inline') {
-                add_action('product_object_info', 'ProductElementViewsCart::renderInlineBlock', 60);
-            }
-            else {
-                add_action('product_object_info', 'ProductElementViewsCart::renderViews', Prd::itemStyle('viewsCart.views.position'));
-                add_action('product_object_info', 'ProductElementViewsCart::renderCart', Prd::itemStyle('viewsCart.cart.position'));
-            }
+        }
+        if(Prd::itemStyle('viewsCart.style') == 'inline') {
+            add_action('product_object_info', 'ProductElementViewsCart::renderInlineBlock', 60);
+        }
+        else {
+            add_action('product_object_info', 'ProductElementViewsCart::renderViews', Prd::itemStyle('viewsCart.views.position'));
+            add_action('product_object_info', 'ProductElementViewsCart::renderCart', Prd::itemStyle('viewsCart.cart.position'));
         }
     }
     public static function adminConfigHtml(): void {
