@@ -15,17 +15,17 @@
                 <i class="ico-line line-3"></i>
                 <i class="ico-gift"></i>
             </span>
-            <span class="ttl"><?php echo $config['title'];?></span>
+            <span class="ttl">{!! $config['title'] !!}</span>
         </h3>
-        <section class="pre-box-sale__content"><?php echo $sale;?></section>
+        <section class="pre-box-sale__content">{!! $sale !!}</section>
     </section>
 </div>
 <style>
     :root {
-        --pre-box-sale-padding      : <?php echo $config['padding'];?>;
-        --pre-box-sale-margin       : <?php echo $config['margin'];?>;
-        --pre-box-sale-bg_box       : <?php echo (!empty($config['bg_box'])) ? $config['bg_box'] : 'var(--theme-color)';?>;
-        --pre-box-sale-text_color   : <?php echo (!empty($config['text_color'])) ? $config['text_color'] : 'var(--theme-color)';?>;
+        --pre-box-sale-padding      : {!! $config['padding'] !!};
+        --pre-box-sale-margin       : {!! $config['margin'] !!};
+        --pre-box-sale-bg_box       : {!! (!empty($config['bg_box'])) ? $config['bg_box'] : 'var(--theme-color)' !!};
+        --pre-box-sale-text_color   : {!! (!empty($config['text_color'])) ? $config['text_color'] : 'var(--theme-color)' !!};
     }
 </style>
 <style type="text/css">
@@ -117,7 +117,7 @@
         transition: all 0.6s ease-out;
     }
     .pre-box-sale-block > h3 span i.ico-star.left {
-        background-image: url(<?php echo PR_EL_PATH;?>/assets/images/sale/star-2.png);
+        background-image: url('{!! PR_EL_PATH !!}/assets/images/sale/star-2.png');
         left: 8px;
         top: -18px;
         filter: alpha(opacity=0);
@@ -133,12 +133,11 @@
         -webkit-animation: star 3s infinite;
         -o-animation: star 3s infinite;
         animation: star 3s infinite;
-        -webkit-animation: star 3s infinite 300ms 0 ease;
-        -moz-animation: star 3s infinite 300ms 0 ease;
+        -moz-animation: star 3s infinite 300ms;
         -ms-animation: star 3s infinite 300ms 0 ease;
     }
     .pre-box-sale-block > h3 span i.ico-star.right {
-        background-image: url(<?php echo PR_EL_PATH;?>/assets/images/sale/star-1.png);
+        background-image: url('{!! PR_EL_PATH !!}/assets/images/sale/star-1.png');
         right: 12px;
         top: -25px;
         filter: alpha(opacity=0);
@@ -154,12 +153,11 @@
         -webkit-animation: star 3s infinite 0.2s;
         -o-animation: star 3s infinite 0.2s;
         animation: star 3s infinite 0.2s;
-        -webkit-animation: star 3s infinite 0.2s 300ms 0 ease;
-        -moz-animation: star 3s infinite 0.2s 300ms 0 ease;
+        -moz-animation: star 3s infinite 0.2s;
         -ms-animation: star 3s infinite 0.2s 300ms 0 ease;
     }
     .pre-box-sale-block > h3 span i.ico-triangle.right-1 {
-        background-image: url(<?php echo PR_EL_PATH;?>/assets/images/sale/triangle-3.png);
+        background-image: url('{!! PR_EL_PATH !!}/assets/images/sale/triangle-3.png');
         width: 8px;
         height: 11px;
         top: -40px;
@@ -177,13 +175,12 @@
         -webkit-animation: firework 3s infinite 0.3s;
         -o-animation: firework 3s infinite 0.3s;
         animation: firework 3s infinite 0.3s;
-        -webkit-animation: firework 3s infinite 0.3s 300ms 0 ease;
-        -moz-animation: firework 3s infinite 0.3s 300ms 0 ease;
+        -moz-animation: firework 3s infinite 0.3s;
         -ms-animation: firework 3s infinite 0.3s 300ms 0 ease;
         transform-origin: 0 100%;
     }
     .pre-box-sale-block > h3 span i.ico-triangle.right-2 {
-        background-image: url(<?php echo PR_EL_PATH;?>/assets/images/sale/triangle-1.png);
+        background-image: url('{!! PR_EL_PATH !!}/assets/images/sale/triangle-1.png');
         width: 10px;
         height: 7px;
         top: -12px;
@@ -201,13 +198,12 @@
         -webkit-animation: firework 3s infinite 0.4s;
         -o-animation: firework 3s infinite 0.4s;
         animation: firework 3s infinite 0.4s;
-        -webkit-animation: firework 3s infinite 0.4s 300ms 0 ease;
-        -moz-animation: firework 3s infinite 0.4s 300ms 0 ease;
+        -moz-animation: firework 3s infinite 0.4s;
         -ms-animation: firework 3s infinite 0.4s 300ms 0 ease;
         transform-origin: 0 100%;
     }
     .pre-box-sale-block > h3 span i.ico-triangle.right-3 {
-        background-image: url(<?php echo PR_EL_PATH;?>/assets/images/sale/triangle-2.png);
+        background-image: url({!! PR_EL_PATH !!}/assets/images/sale/triangle-2.png);
         width: 12px;
         height: 4px;
         top: -24px;
@@ -225,13 +221,12 @@
         -webkit-animation: firework 3s infinite 0.5s;
         -o-animation: firework 3s infinite 0.5s;
         animation: firework 3s infinite 0.5s;
-        -webkit-animation: firework 3s infinite 0.5s 300ms 0 ease;
-        -moz-animation: firework 3s infinite 0.5s 300ms 0 ease;
+        -moz-animation: firework 3s infinite 0.5s;
         -ms-animation: firework 3s infinite 0.5s 300ms 0 ease;
         transform-origin: 0 100%;
     }
     .pre-box-sale-block > h3 span i.ico-triangle.left-1 {
-        background-image: url(<?php echo PR_EL_PATH;?>/assets/images/sale/triangle-4.png);
+        background-image: url({!! PR_EL_PATH !!}/assets/images/sale/triangle-4.png);
         width: 8px;
         height: 11px;
         top: -25px;
@@ -249,13 +244,12 @@
         -webkit-animation: firework 3s infinite 0.3s;
         -o-animation: firework 3s infinite 0.3s;
         animation: firework 3s infinite 0.3s;
-        -webkit-animation: firework 3s infinite 0.3s 300ms 0 ease;
-        -moz-animation: firework 3s infinite 0.3s 300ms 0 ease;
+        -moz-animation: firework 3s infinite 0.3s;
         -ms-animation: firework 3s infinite 0.3s 300ms 0 ease;
         transform-origin: 100% 0;
     }
     .pre-box-sale-block > h3 span i.ico-triangle.left-2 {
-        background-image: url(<?php echo PR_EL_PATH;?>/assets/images/sale/triangle-5.png);
+        background-image: url({!! PR_EL_PATH !!}/assets/images/sale/triangle-5.png);
         width: 10px;
         height: 7px;
         top: -29px;
@@ -273,13 +267,12 @@
         -webkit-animation: firework 3s infinite 0.4s;
         -o-animation: firework 3s infinite 0.4s;
         animation: firework 3s infinite 0.4s;
-        -webkit-animation: firework 3s infinite 0.4s 300ms 0 ease;
-        -moz-animation: firework 3s infinite 0.4s 300ms 0 ease;
+        -moz-animation: firework 3s infinite 0.4s;
         -ms-animation: firework 3s infinite 0.4s 300ms 0 ease;
         transform-origin: 100% 0;
     }
     .pre-box-sale-block > h3 span i.ico-triangle.left-3 {
-        background-image: url(<?php echo PR_EL_PATH;?>/assets/images/sale/triangle-6.png);
+        background-image: url({!! PR_EL_PATH !!}/assets/images/sale/triangle-6.png);
         width: 12px;
         height: 4px;
         top: -6px;
@@ -297,13 +290,12 @@
         -webkit-animation: firework 3s infinite 0.5s;
         -o-animation: firework 3s infinite 0.5s;
         animation: firework 3s infinite 0.5s;
-        -webkit-animation: firework 3s infinite 0.5s 300ms 0 ease;
-        -moz-animation: firework 3s infinite 0.5s 300ms 0 ease;
+        -moz-animation: firework 3s infinite 0.5s;
         -ms-animation: firework 3s infinite 0.5s 300ms 0 ease;
         transform-origin: 100% 0;
     }
     .pre-box-sale-block > h3 span i.ico-line.line-1 {
-        background-image: url(<?php echo PR_EL_PATH;?>/assets/images/sale/line-2.png);
+        background-image: url({!! PR_EL_PATH !!}/assets/images/sale/line-2.png);
         width: 12px;
         height: 11px;
         top: -37px;
@@ -321,13 +313,12 @@
         -webkit-animation: firework 3s infinite 0.3s;
         -o-animation: firework 3s infinite 0.3s;
         animation: firework 3s infinite 0.3s;
-        -webkit-animation: firework 3s infinite 0.3s 300ms 0 ease;
-        -moz-animation: firework 3s infinite 0.3s 300ms 0 ease;
+        -moz-animation: firework 3s infinite 0.3s;
         -ms-animation: firework 3s infinite 0.3s 300ms 0 ease;
         transform-origin: 0 100%;
     }
     .pre-box-sale-block > h3 span i.ico-line.line-2 {
-        background-image: url(<?php echo PR_EL_PATH;?>/assets/images/sale/line-1.png);
+        background-image: url({!! PR_EL_PATH !!}/assets/images/sale/line-1.png);
         width: 10px;
         height: 14px;
         top: -32px;
@@ -345,13 +336,12 @@
         -webkit-animation: firework 3s infinite 0.4s;
         -o-animation: firework 3s infinite 0.4s;
         animation: firework 3s infinite 0.4s;
-        -webkit-animation: firework 3s infinite 0.4s 300ms 0 ease;
-        -moz-animation: firework 3s infinite 0.4s 300ms 0 ease;
+        -moz-animation: firework 3s infinite 0.4s;
         -ms-animation: firework 3s infinite 0.4s 300ms 0 ease;
         transform-origin: 0 100%;
     }
     .pre-box-sale-block > h3 span i.ico-line.line-3 {
-        background-image: url(<?php echo PR_EL_PATH;?>/assets/images/sale/line-3.png);
+        background-image: url({!! PR_EL_PATH !!}/assets/images/sale/line-3.png);
         width: 14px;
         height: 9px;
         top: -16px;
@@ -369,8 +359,7 @@
         -webkit-animation: firework 3s infinite 0.5s;
         -o-animation: firework 3s infinite 0.5s;
         animation: firework 3s infinite 0.5s;
-        -webkit-animation: firework 3s infinite 0.5s 300ms 0 ease;
-        -moz-animation: firework 3s infinite 0.5s 300ms 0 ease;
+        -moz-animation: firework 3s infinite 0.5s;
         -ms-animation: firework 3s infinite 0.5s 300ms 0 ease;
         transform-origin: 100% 0;
     }
@@ -383,7 +372,7 @@
         width: 60px;
         height: 69px;
         background-size: contain;
-        background-image: url(<?php echo PR_EL_PATH;?>/assets/images/sale/ico-gift.png);
+        background-image: url('{!! PR_EL_PATH !!}/assets/images/sale/ico-gift.png');
         background-repeat: no-repeat;
         background-position: center 19px;
         margin-left: 3px;
@@ -392,7 +381,6 @@
         display: none;
         content: "";
         width: 40px;
-        background-image: url(<?php echo PR_EL_PATH;?>/assets/images/sale/light-blur.png);
         background-repeat: no-repeat;
         background-size: 40px auto;
         top: 0;
@@ -402,8 +390,7 @@
         -webkit-animation: light-ttl 3s infinite;
         -o-animation: light-ttl 3s infinite;
         animation: light-ttl 3s infinite;
-        -webkit-animation: light-ttl 3s infinite 300ms 0 ease;
-        -moz-animation: light-ttl 3s infinite 300ms 0 ease;
+        -moz-animation: light-ttl 3s infinite 300ms;
         -ms-animation: light-ttl 3s infinite 300ms 0 ease;
     }
     .pre-box-sale-block.animated > h3 span.ttl::before {

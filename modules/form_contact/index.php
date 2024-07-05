@@ -1,4 +1,7 @@
 <?php
+
+use JetBrains\PhpStorm\NoReturn;
+
 Class Product_Element_Form_Contact {
 
     const KEY = 'form_contact';
@@ -17,7 +20,7 @@ Class Product_Element_Form_Contact {
         return $module;
     }
 
-    public static function config($key = '') {
+    static function config($key = '') {
 
         $option = [
             'position'          => 50,
@@ -44,35 +47,103 @@ Class Product_Element_Form_Contact {
         return $option_save;
     }
 
-    public static function pageConfig() {
-
+    static function pageConfig(): void
+    {
         if(class_exists('generate_form_register')) {
-            $form 	  = Form_Register::getBy('key', 'product_form_contact');
+
+            $form = Form_Register::where('key', 'product_form_contact')->first();
+
             if(!have_posts($form)) {
+
                 $forms_default = [
-                    'key'               => 'product_form_contact',
-                    'name'              => 'ĐĂNG KÝ LIÊN HỆ TƯ VẤN SẢN PHẨM',
-                    'is_live'           => 1,
-                    'send_email'        => 0,
-                    'field'             => "data|title|Data|data|true|required\nurl|excerpt|Liên kết|data|true",
-                    'metadata'          => '',
-                    'taxonomy'          => 'product_form_contact',
-                    'taxonomy_config'   => "name='Đăng ký liên hệ tư vấn'",
+                    'key'       => 'product_form_contact',
+                    'name'      => 'Đăng ký liên hệ tư vấn',
+                    'is_live'   => 1,
+                    'send_email'=> 0,
+                    'field'     => [
+                        "default" => [
+                            'name' => [
+                                "use" => 0,
+                                "field" => "name",
+                                "label" => "",
+                                "required" => 0,
+                                "limit" => 0,
+                            ],
+                            'email' => [
+                                "use" => 0,
+                                "field" => "email",
+                                "label" => "Email",
+                                "required" => 0,
+                                "isEmail" => 0,
+                            ],
+                            'phone' => [
+                                "use"   => 1,
+                                "field" => "phone",
+                                "label" => "Số điện thoại",
+                                "required" => 1,
+                                "isPhone" => 1,
+                            ],
+                            'message' => [
+                                "use"   => 0,
+                                "field" => "note",
+                                "label" => "Ghi chú",
+                                "required" => 0,
+                            ],
+                        ],
+                        'metadata'  => [
+                            uniqid() => [
+                                'name'  => 'url',
+                                'field' => 'url',
+                                'label' => 'Liên kết'
+                            ]
+                        ],
+                    ],
                 ];
+
                 Form_Register::insert($forms_default);
+
+                Form_Register_Helper::build();
             }
-            include PR_EL_PATH.'/modules/'.Product_Element_Form_Contact::KEY.'/views/page-config.php';
+
+
+            $formText = form();
+            $formText->number('form_contact[position]',['label' => 'Thứ tự gắn vào hook "product_detail_info"'], Product_Element_Form_Contact::config('position'));
+            $formText->text('form_contact[title]', ['label' => 'Tiêu đề'], Product_Element_Form_Contact::config('title'));
+            $formText->text('form_contact[placeholder]',[
+                'label' => 'Placeholder input',
+                'start' => 6
+            ], Product_Element_Form_Contact::config('placeholder'));
+            $formText->fontIcon('form_contact[button_icon]', [
+                'label' => 'Button send icon',
+                'start' => 6
+            ], Product_Element_Form_Contact::config('button_icon'));
+
+            $formStyle = form();
+            $formStyle->text('form_contact[padding]', ['label' => 'Padding khung'], Product_Element_Form_Contact::config('padding'));
+            $formStyle->color('form_contact[bg_box]', ['label' => 'Màu nền Box', 'start' => 3], Product_Element_Form_Contact::config('bg_box'));
+            $formStyle->color('form_contact[bg_input]', ['label' => 'Màu nền input', 'start' => 3], Product_Element_Form_Contact::config('bg_input'));
+            $formStyle->color('form_contact[bg_button]', ['label' => 'Màu nền button', 'start' => 3], Product_Element_Form_Contact::config('bg_button'));
+            $formStyle->color('form_contact[bg_button_hover]', ['label' => 'Màu nền button hover', 'start' => 3], Product_Element_Form_Contact::config('bg_button_hover'));
+            $formStyle->color('form_contact[color_button]', ['label' => 'Màu text button', 'start' => 3], Product_Element_Form_Contact::config('color_button'));
+            $formStyle->color('form_contact[color_button_hover]', ['label' => 'Màu text button hover', 'start' => 3], Product_Element_Form_Contact::config('color_button_hover'));
+
+            Plugin::view(PR_EL_NAME, Product_Element_Form_Contact::KEY.'/admin/config', [
+                'formText' => $formText,
+                'formStyle' => $formStyle,
+            ]);
         }
         else {
-            echo notice('error', 'Plugin <b>generate_form_register</b> chưa được cài đặt.');
+            echo Admin::alert('error', 'Plugin <b>generate_form_register</b> chưa được cài đặt.');
         }
     }
 
-    public static function saveConfig($ci, $model) {
+    #[NoReturn]
+    static function saveConfig(\SkillDo\Http\Request $request, $model): void
+    {
 
         $config = Product_Element_Form_Contact::config();
 
-        $form_contact = Request::Post('form_contact');
+        $form_contact = $request->input('form_contact');
 
         foreach ($config as $key => $item) {
             if(isset($form_contact[$key]))
@@ -81,21 +152,19 @@ Class Product_Element_Form_Contact {
 
         Option::update('product_element_form_contact', $config);
 
-        $result['status']  = 'success';
-
-        $result['message'] = __('Lưu dữ liệu thành công');
-
-        return $result;
-
+        response()->success(trans('ajax.save.success'));
     }
 
-    public function render($object) {
+    public function render($object): void
+    {
         $config = Product_Element_Form_Contact::config();
-        include PR_EL_PATH.'/modules/'.Product_Element_Form_Contact::KEY.'/views/element.php';
+
+        Plugin::view(PR_EL_NAME, Product_Element_Form_Contact::KEY.'/element', ['config' => $config]);
     }
 
-    public function css() {
-        include PR_EL_PATH.'/modules/'.Product_Element_Form_Contact::KEY.'/views/style-element.css';
+    public function css(): void
+    {
+        include PR_EL_PATH.'/assets/css/form-contact.css';
     }
 }
 

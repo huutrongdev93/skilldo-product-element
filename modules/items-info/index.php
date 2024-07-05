@@ -12,8 +12,21 @@ Class ProductElementItems {
     }
 
     static function adminConfigHtml(): void {
+
         $itemInfo = Option::get('product_item_info', ['enable' => 0, 'number' => 3, 'item' => []]);
-        Plugin::partial(PR_EL_NAME, 'modules/items-info/views/admin/config', ['itemInfo' => $itemInfo]);
+
+        $form = form();
+        $form->switch('product_item_info[enable]', ['label' => 'Bật tắt item', 'start' => 2], $itemInfo['enable'] ?? 0);
+        $form->color('product_item_info[headingColor]', ['label' => 'Màu tiêu đề', 'start' => 2], $itemInfo['headingColor'] ?? '#000');
+        $form->color('product_item_info[descColor]', ['label' => 'Màu mô tả', 'start' => 2], $itemInfo['descColor'] ?? '#000');
+        $form->number('product_item_info[number]', ['label' => 'Số item / hàng', 'start' => 2], $itemInfo['number'] ?? 3);
+        $form->repeater('product_item_info[items]', ['label' => 'Danh sách item', 'fields' => [
+            ['name' => 'image', 'type' => 'image', 'label' => __('Icon'), 'col' => 3],
+            ['name' => 'title', 'type' => 'text',  'label' => __('Tiêu đề'), 'col' => 4, 'language' => true],
+            ['name' => 'description', 'type' => 'textarea', 'label' => __('Mô tả'), 'col' => 5, 'language' => true],
+        ]], $itemInfo['items'] ?? []);
+
+        Plugin::view(PR_EL_NAME, 'items-info/admin/config', ['itemInfo' => $itemInfo, 'form' => $form]);
     }
 
     static function adminProcess($productOptions): array {
@@ -27,15 +40,28 @@ Class ProductElementItems {
     }
 
     static function render($object): void {
+
         $itemInfo = Option::get('product_item_info', ['enable' => 0, 'number' => 3, 'item' => []]);
+
         if($itemInfo['enable'] == 1) {
+
             $number = 0;
-            Plugin::partial(PR_EL_NAME, 'modules/items-info/views/items', ['itemInfo' => $itemInfo, 'number' => $number]);
+
+            $phone = Option::get('contact_phone');
+
+            foreach ($itemInfo['items'] as $key => $item) {
+
+                $item['description'] = str_replace('{contact_phone}', $phone, $item['description']);
+
+                $itemInfo['items'][$key] = $item;
+            }
+
+            Plugin::view(PR_EL_NAME, 'items-info/items', ['itemInfo' => $itemInfo, 'number' => $number]);
         }
     }
 
     static function less(): void {
-        include PR_EL_PATH.'/modules/items-info/views/style-element.less';
+        include PR_EL_PATH.'/assets/css/items-info.less';
     }
 }
 

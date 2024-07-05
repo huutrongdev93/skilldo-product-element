@@ -22,7 +22,7 @@
 .pre-form-contact__box .form-group .form-control {
     background-color: var(--pre-form-contact-bg_input);
     box-shadow: none; border-radius: 5px 0 0 5px; font-size: 15px;
-    border: 0; min-height: 41px;
+    border: 0; min-height: 41px; height: 100%;
 }
 .pre-form-contact__box .form-group button {
     background-color: var(--pre-form-contact-bg_button);

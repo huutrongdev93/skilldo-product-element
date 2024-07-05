@@ -1,15 +1,15 @@
 <div class="pre-box-sale">
     <div class="box-promotion">
-        <h4 class="header-promotion"><i class="fas fa-gift"></i> <?php echo $config['title'];?></h4>
-        <div class="pre-box-sale__content"><?php echo $sale;?></div>
+        <h4 class="header-promotion"><i class="fas fa-gift"></i> {!! $config['title'] !!}</h4>
+        <div class="pre-box-sale__content">{!! $sale !!}</div>
     </div>
 </div>
 <style>
     :root {
-        --pre-box-sale-padding      : <?php echo $config['padding'];?>;
-        --pre-box-sale-margin       : <?php echo $config['margin'];?>;
-        --pre-box-sale-bg_box       : <?php echo (!empty($config['bg_box'])) ? $config['bg_box'] : 'var(--theme-color)';?>;
-        --pre-box-sale-text_color   : <?php echo (!empty($config['text_color'])) ? $config['text_color'] : 'var(--theme-color)';?>;
+        --pre-box-sale-padding      : {!! $config['padding'] !!};
+        --pre-box-sale-margin       : {!! $config['margin'] !!};
+        --pre-box-sale-bg_box       : {!! (!empty($config['bg_box'])) ? $config['bg_box'] : 'var(--theme-color)' !!};
+        --pre-box-sale-text_color   : {!! (!empty($config['text_color'])) ? $config['text_color'] : 'var(--theme-color)' !!};
     }
 </style>
 <style>

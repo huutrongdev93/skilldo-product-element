@@ -5,15 +5,15 @@ Plugin class    : Product_Element
 Plugin uri      : http://sikido.vn
 Description     : Ứng dụng Product Element
 Author          : Nguyễn Hữu Trọng
-Version         : 1.2.0
+Version         : 1.3.0
  */
-define( 'PR_EL_NAME', 'product-element' );
+const PR_EL_NAME = 'product-element';
 
-define( 'PR_EL_PATH', Path::plugin(PR_EL_NAME) );
+define('PR_EL_PATH', Path::plugin(PR_EL_NAME) );
 
 class Product_Element {
 
-    private $name = 'Product_Element';
+    private string $name = 'Product_Element';
 
     function __construct() {
         $this->loadDependencies();
@@ -25,12 +25,13 @@ class Product_Element {
 
     public function uninstall() {}
 
-    private function loadDependencies() {
-        require_once PR_EL_PATH.'/admin/product-element-admin.php';
+    private function loadDependencies(): void
+    {
+        require_once PR_EL_PATH.'/admin/admin.php';
     }
 
-    private function loadModules() {
-
+    private function loadModules(): void
+    {
         $module = static::config('module_active');
 
         if(have_posts($module)) {
@@ -67,7 +68,7 @@ class Product_Element {
         $modules = apply_filters('product_element_module', [
             'general' => [
                 'label' => 'Cấu hình',
-                'callback' => 'admin_page_product_element_general'
+                'callback' => 'Product_Element_Admin::pageGeneral'
             ],
         ]);
 

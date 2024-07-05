@@ -1,4 +1,7 @@
 <?php
+
+use JetBrains\PhpStorm\NoReturn;
+
 Class Product_Element_Box_Sale {
 
     const KEY = 'box_sale';
@@ -8,8 +11,7 @@ Class Product_Element_Box_Sale {
         add_filter('product_detail_info', [$this, 'render'], self::config('position'));
         add_action('theme_custom_css', [$this, 'css'], 10);
         if(Admin::is()) {
-            Metabox::add('admin_product_element_box_sale', 'Khuyến mãi', 'admin_product_element_box_sale', ['module' => 'products']);
-            function admin_product_element_box_sale($object) { Product_Element_Box_Sale::metaboxSale($object);}
+            Metabox::add('admin_product_element_box_sale', 'Khuyến mãi', 'Product_Element_Box_Sale::metaboxSale', ['module' => 'products']);
             add_action('save_object', [$this, 'saveSale'], 10, 2);
         }
     }
@@ -22,7 +24,7 @@ Class Product_Element_Box_Sale {
         return $module;
     }
 
-    public static function config($key = '') {
+    static function config($key = '') {
 
         $option = [
             'position'          => 50,
@@ -45,15 +47,17 @@ Class Product_Element_Box_Sale {
         return $option_save;
     }
 
-    public static function pageConfig() {
-        include PR_EL_PATH.'/modules/'.Product_Element_Box_Sale::KEY.'/views/page-config.php';
+    static function pageConfig(): void
+    {
+        Plugin::view(PR_EL_NAME, Product_Element_Box_Sale::KEY.'/admin/config');
     }
 
-    public static function saveConfig($ci, $model) {
-
+    #[NoReturn]
+    static function saveConfig(\SkillDo\Http\Request $request, $model): void
+    {
         $config = Product_Element_Box_Sale::config();
 
-        $form_contact = Request::Post('box_sale');
+        $form_contact = $request->input('box_sale');
 
         foreach ($config as $key => $item) {
             if(isset($form_contact[$key]))
@@ -62,26 +66,25 @@ Class Product_Element_Box_Sale {
 
         Option::update('product_element_box_sale', $config);
 
-        $result['status']  = 'success';
-
-        $result['message'] = __('Lưu dữ liệu thành công');
-
-        return $result;
-
+        response()->success(trans('ajax.save.success'));
     }
 
     /****===================================
      * Xử lý metabox
     ===================================*/
-    public static function metaboxSale($object) {
+    static function metaboxSale($object): void
+    {
         $sale = (have_posts($object)) ? Product::getMeta($object->id, 'box_sale', true) : '';
-        $Form = new FormBuilder();
-        $Form->add('box_sale', 'wysiwyg', ['label' => 'Khuyến mãi'], $sale)->html(false);
+
+        form()->wysiwyg('box_sale', ['label' => 'Khuyến mãi'], $sale)->html(false);
     }
 
-    public static function saveSale($product_id, $module) {
+    static function saveSale($product_id, $module): void
+    {
         if($module == 'products') {
-            $sale = Request::Post('box_sale', ['clear' => false]);
+
+            $sale = request()->input('box_sale');
+
             Product::updateMeta($product_id, 'box_sale', $sale);
         }
     }
@@ -89,20 +92,34 @@ Class Product_Element_Box_Sale {
     /****===================================
      * Render frontend
     ===================================*/
-    public function render($object) {
+    public function render($object): void
+    {
         $sale   = Product::getMeta($object->id, 'box_sale', true);
+
         if(!empty($sale) && $sale != '<p><br data-mce-bogus="1"></p>') {
+
             $config = Product_Element_Box_Sale::config();
-            if ($config['style'] == 1) {
-                include PR_EL_PATH . '/modules/' . Product_Element_Box_Sale::KEY . '/views/element.php';
-            } else {
-                include PR_EL_PATH . '/modules/' . Product_Element_Box_Sale::KEY . '/views/element-2.php';
+
+            if ($config['style'] == 1)
+            {
+                Plugin::view(PR_EL_NAME, Product_Element_Box_Sale::KEY.'/element', [
+                    'config' => $config,
+                    'sale' => $sale
+                ]);
+            }
+            else
+            {
+                Plugin::view(PR_EL_NAME, Product_Element_Box_Sale::KEY.'/element-2', [
+                    'config' => $config,
+                    'sale' => $sale
+                ]);
             }
         }
     }
 
-    public function css() {
-        include PR_EL_PATH.'/modules/'.Product_Element_Box_Sale::KEY.'/views/style-element.css';
+    public function css(): void
+    {
+        include PR_EL_PATH.'/assets/css/box-sale.css';
     }
 }
 
