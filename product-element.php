@@ -1,12 +1,4 @@
 <?php
-/**
-Plugin name     : Product Element
-Plugin class    : Product_Element
-Plugin uri      : http://sikido.vn
-Description     : Ứng dụng Product Element
-Author          : Nguyễn Hữu Trọng
-Version         : 1.3.0
- */
 const PR_EL_NAME = 'product-element';
 
 define('PR_EL_PATH', Path::plugin(PR_EL_NAME) );
