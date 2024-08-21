@@ -26,7 +26,11 @@ Class ProductElementItems {
             ['name' => 'description', 'type' => 'textarea', 'label' => __('Mô tả'), 'col' => 5, 'language' => true],
         ]], $itemInfo['items'] ?? []);
 
-        Plugin::view(PR_EL_NAME, 'items-info/admin/config', ['itemInfo' => $itemInfo, 'form' => $form]);
+        Admin::view('components/system-default', [
+            'title'       => 'Item ở thông tin sản phẩm',
+            'description' => trans('Thồng thường nằm dưới button mua hàng'),
+            'form'        => $form
+        ]);
     }
 
     static function adminProcess($productOptions): array {
@@ -51,7 +55,9 @@ Class ProductElementItems {
 
             foreach ($itemInfo['items'] as $key => $item) {
 
-                $item['description'] = str_replace('{contact_phone}', $phone, $item['description']);
+                if(!empty($phone)) {
+                    $item['description'] = str_replace('{contact_phone}', $phone, $item['description']);
+                }
 
                 $itemInfo['items'][$key] = $item;
             }

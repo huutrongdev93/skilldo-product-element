@@ -36,17 +36,26 @@
 
             loading.show();
 
-            request.post(ajax, data).then(function(response) {
+            request.post(ajax, data)
+                .then(function(response) {
 
-                loading.hide();
+                    loading.hide();
 
-                SkilldoMessage.response(response);
+                    SkilldoMessage.response(response);
 
-                if (response.status === 'success') {
+                    if (response.status === 'success') {
 
-					window.location.reload();
-                }
-            });
+                        if(data.module === 'general') {
+                            window.location.reload();
+                        }
+                    }
+                })
+                .catch(function (error) {
+
+                    loading.hide();
+
+                    SkilldoMessage.response(error.message);
+                })
 
             return false;
         });

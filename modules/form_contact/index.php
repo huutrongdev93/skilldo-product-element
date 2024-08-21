@@ -146,8 +146,15 @@ Class Product_Element_Form_Contact {
         $form_contact = $request->input('form_contact');
 
         foreach ($config as $key => $item) {
-            if(isset($form_contact[$key]))
-            $config[$key] = Str::clear($form_contact[$key]);
+            if(isset($form_contact[$key])) {
+
+                if($key == 'button_icon') {
+                    $form_contact[$key] = htmlspecialchars($form_contact[$key]);
+                }
+
+                $config[$key] = $form_contact[$key];
+            }
+
         }
 
         Option::update('product_element_form_contact', $config);
