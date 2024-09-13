@@ -175,7 +175,7 @@ Class ProductElementViewsCart {
     }
     static function renderCart($object): void {
         if(Prd::itemStyle('viewsCart.cart.show') == 1) {
-            $count = Product::count(Qr::set('parent_id', $object->id)->where('type', 'variations'));
+            $count = Variation::count(Qr::set('parent_id', $object->id));
             Plugin::view(PR_EL_NAME, 'views_cart/cart', ['count' => $count, 'object' => $object]);
         }
     }
