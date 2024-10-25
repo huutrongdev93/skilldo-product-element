@@ -30,6 +30,12 @@
             $form = form();
             $form->number('box_sale[position]', ['label' => 'Thứ tự gắn vào hook "product_detail_info"'], Product_Element_Box_Sale::config('position'));
             $form->text('box_sale[title]', ['label' => 'Tiêu đề'], Product_Element_Box_Sale::config('title'));
+            if(Language::hasMulti()) {
+                foreach (Language::list() as $key_lang => $item) {
+                    if($key_lang == Language::default()) continue;
+                    $form->text('box_sale[title_'.$key_lang.']', ['label' => 'Tiêu đề ('.$item['label'].')', 'start' => 6], Product_Element_Box_Sale::config('title_'.$key_lang));
+                }
+            }
             @endphp
             {!! $form->html(); !!}
         </div>
