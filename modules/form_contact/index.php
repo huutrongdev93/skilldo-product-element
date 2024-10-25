@@ -36,6 +36,14 @@ Class Product_Element_Form_Contact {
             'color_button_hover'=> '#000',
         ];
 
+        if(Language::hasMulti()) {
+            foreach (Language::list() as $key_lang => $item) {
+                if($key_lang == Language::default()) continue;
+                $option['title_'.$key_lang] = 'NHẬP THÔNG TIN ĐỂ ĐƯỢC TƯ VẤN';
+                $option['placeholder_'.$key_lang] = 'Số điện thoại của bạn';
+            }
+        }
+
         $option_save = Option::get('product_element_form_contact', []);
 
         foreach ($option as $key_default => $item) {
@@ -108,11 +116,21 @@ Class Product_Element_Form_Contact {
 
             $formText = form();
             $formText->number('form_contact[position]',['label' => 'Thứ tự gắn vào hook "product_detail_info"'], Product_Element_Form_Contact::config('position'));
-            $formText->text('form_contact[title]', ['label' => 'Tiêu đề'], Product_Element_Form_Contact::config('title'));
+            $formText->text('form_contact[title]', ['label' => 'Tiêu đề', 'start' => 6], Product_Element_Form_Contact::config('title'));
             $formText->text('form_contact[placeholder]',[
                 'label' => 'Placeholder input',
                 'start' => 6
             ], Product_Element_Form_Contact::config('placeholder'));
+            if(Language::hasMulti()) {
+                foreach (Language::list() as $key_lang => $item) {
+                    if($key_lang == Language::default()) continue;
+                    $formText->text('form_contact[title_'.$key_lang.']', ['label' => 'Tiêu đề ('.$item['label'].')', 'start' => 6], Product_Element_Form_Contact::config('title_'.$key_lang));
+                    $formText->text('form_contact[placeholder_'.$key_lang.']',[
+                        'label' => 'Placeholder input ('.$item['label'].')',
+                        'start' => 6
+                    ], Product_Element_Form_Contact::config('placeholder_'.$key_lang));
+                }
+            }
             $formText->fontIcon('form_contact[button_icon]', [
                 'label' => 'Button send icon',
                 'start' => 6
@@ -165,6 +183,12 @@ Class Product_Element_Form_Contact {
     public function render($object): void
     {
         $config = Product_Element_Form_Contact::config();
+
+        if(Language::hasMulti() && Language::current() != Language::default()) {
+            $langCurrent = Language::current();
+            $config['title'] = Product_Element_Form_Contact::config('title_'.$langCurrent);
+            $config['placeholder'] = Product_Element_Form_Contact::config('placeholder_'.$langCurrent);
+        }
 
         Plugin::view(PR_EL_NAME, Product_Element_Form_Contact::KEY.'/element', ['config' => $config]);
     }

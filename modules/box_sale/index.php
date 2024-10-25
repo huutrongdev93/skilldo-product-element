@@ -36,6 +36,13 @@ Class Product_Element_Box_Sale {
             'text_color'        => '#fff',
         ];
 
+        if(Language::hasMulti()) {
+            foreach (Language::list() as $key_lang => $item) {
+                if($key_lang == Language::default()) continue;
+                $option['title_'.$key_lang] = 'QUÀ TẶNG & KHUYẾN MÃI';
+            }
+        }
+
         $option_save = Option::get('product_element_box_sale', []);
 
         foreach ($option as $key_default => $item) {
@@ -77,6 +84,13 @@ Class Product_Element_Box_Sale {
         $sale = (have_posts($object)) ? Product::getMeta($object->id, 'box_sale', true) : '';
 
         form()->wysiwyg('box_sale', ['label' => 'Khuyến mãi'], $sale)->html(false);
+
+        if(Language::hasMulti()) {
+            foreach (Language::list() as $key_lang => $item) {
+                if($key_lang == Language::default()) continue;
+                form()->wysiwyg('box_sale_'.$key_lang, ['label' => 'Khuyến mãi ('.$item['label'].')'], $sale)->html(false);
+            }
+        }
     }
 
     static function saveSale($product_id, $module): void
@@ -86,6 +100,14 @@ Class Product_Element_Box_Sale {
             $sale = request()->input('box_sale');
 
             Product::updateMeta($product_id, 'box_sale', $sale);
+
+            if(Language::hasMulti()) {
+                foreach (Language::list() as $key_lang => $item) {
+                    if($key_lang == Language::default()) continue;
+                    $sale_lang = request()->input('box_sale_'.$key_lang);
+                    Product::updateMeta($product_id, 'box_sale_'.$key_lang, $sale_lang);
+                }
+            }
         }
     }
 
@@ -96,9 +118,19 @@ Class Product_Element_Box_Sale {
     {
         $sale   = Product::getMeta($object->id, 'box_sale', true);
 
+        if(Language::hasMulti() && Language::current() != Language::default()) {
+            $langCurrent = Language::current();
+            $sale = Product::getMeta($object->id, 'box_sale_'.$langCurrent, true);
+        }
+
         if(!empty($sale) && $sale != '<p><br data-mce-bogus="1"></p>') {
 
             $config = Product_Element_Box_Sale::config();
+
+            if(Language::hasMulti() && Language::current() != Language::default()) {
+                $langCurrent = Language::current();
+                $config['title'] = Product_Element_Box_Sale::config('title_'.$langCurrent);
+            }
 
             if ($config['style'] == 1)
             {
