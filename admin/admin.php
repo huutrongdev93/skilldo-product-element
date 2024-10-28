@@ -46,6 +46,7 @@ Class Product_Element_Admin {
             [
                 'form_contact' => 'Form contact',
                 'box_sale'     => 'Khung khuyến mãi',
+                'button_contact' => 'Button liên hệ',
             ],
             [
                 'label' => 'Hiển thị',

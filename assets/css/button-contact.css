@@ -1,0 +1,15 @@
+.pr-element-button-contact {
+  margin-bottom: 10px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #000;
+}
+.pr-element-button-contact .buttons-contact {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+}
+.pr-element-button-contact .buttons-contact img {
+  width: 100%;
+}
+/*# sourceMappingURL=button-contact.css.map */
