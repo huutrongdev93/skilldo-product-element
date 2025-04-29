@@ -154,7 +154,7 @@ Class ProductElementViewsCart {
     }
     public static function saveViews($product_id, $module): void {
         if($module == 'products') {
-            $product_views = (int)Request::Post('views');
+            $product_views = (int)request()->input('views');
             Product::updateMeta($product_id, 'views', $product_views);
         }
     }
